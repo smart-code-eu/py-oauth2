@@ -23,6 +23,8 @@ class OAuthToken(db.Model, TokenMixin):
     issued_at = db.Column(db.Integer)
     expires_in = db.Column(db.Integer)
 
+    jwt_jti = db.Column(db.Text)
+
     user_id = db.Column(db.Integer,
                         db.ForeignKey('user.id'),
                         nullable=False)
@@ -39,28 +41,10 @@ class OAuthToken(db.Model, TokenMixin):
         return self.client.client_id
 
     def get_scope(self):
-        """A method to get scope of the authorization code. For instance,
-        the column is called ``scope``::
-            def get_scope(self):
-                return self.scope
-        :return: scope string
-        """
         return self.scope
 
     def get_expires_in(self):
-        """A method to get the ``expires_in`` value of the token. e.g.
-        the column is called ``expires_in``::
-            def get_expires_in(self):
-                return self.expires_in
-        :return: timestamp int
-        """
         return self.expires_in
 
     def get_expires_at(self):
-        """A method to get the value when this token will be expired. e.g.
-        it would be::
-            def get_expires_at(self):
-                return self.created_at + self.expires_in
-        :return: timestamp int
-        """
         return self.issued_at + self.expires_in

@@ -1,4 +1,4 @@
-from authlib.specs.rfc6750 import BearerTokenValidator
+from authlib.specs.rfc6750 import BearerTokenValidator as _BearerTokenValidator
 
 from oauth.models import OAuthToken
 
@@ -12,10 +12,11 @@ def scope_to_list(scope):
     else:
         return scope.strip().split(" ")
 
-class MyBearerTokenValidator(BearerTokenValidator):
+
+class BearerTokenValidator(_BearerTokenValidator):
     def authenticate_token(self, token_string):
-        result = OAuthToken.query\
-            .filter_by(access_token=token_string)\
+        result = OAuthToken.query \
+            .filter_by(access_token=token_string) \
             .filter_by(status='ACTIVE').first()
         return result
 

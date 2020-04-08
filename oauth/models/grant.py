@@ -1,10 +1,16 @@
 import oauth
+
 db = oauth.__DB__
 
-grant_association_table = db.Table('oauth_clients_oauth_client_grants', db.metadata,
-                             db.Column('oauth_client_id', db.Integer, db.ForeignKey('oauth_client.id')),
-                             db.Column('oauth_client_grant_id', db.Integer, db.ForeignKey('oauth_client_grant.id'))
-)
+grant_association_table = db.Table('oauth_clients_oauth_client_grants',
+                                   db.metadata,
+                                   db.Column('oauth_client_id', db.Integer,
+                                             db.ForeignKey('oauth_client.id')),
+                                   db.Column('oauth_client_grant_id',
+                                             db.Integer, db.ForeignKey(
+                                           'oauth_client_grant.id'))
+                                   )
+
 
 class OAuthClientGrant(db.Model):
     __tablename__ = 'oauth_client_grant'

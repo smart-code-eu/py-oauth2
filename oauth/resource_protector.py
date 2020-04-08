@@ -7,6 +7,7 @@ from authlib.specs.rfc6749 import (
     ResourceProtector as _ResourceProtector,
     MissingAuthorizationError, HttpRequest,
     OAuth2Error)
+from flask import _app_ctx_stack
 from werkzeug.wrappers import Response
 
 
@@ -57,14 +58,16 @@ class ResourceProtector(_ResourceProtector):
             flask.request.data,
             flask.request.headers
         )
+
         if not callable(operator):
             operator = operator.upper()
-        print("AQUIRE: {0}".format(flask.request.headers))
+
         token = self.validate_request(scope, request, operator)
-        print("TOKEN: {0}".format(token))
+
         # token_authenticated.send(self, token=token)
-        # ctx = _app_ctx_stack.top
-        # ctx.authlib_server_oauth2_token = token
+        ctx = _app_ctx_stack.top
+        ctx.sapi_oauth2_token = token
+
         flask.request.api_token = token
         return token
 

@@ -4,13 +4,14 @@ import random
 import flask
 from authlib.common.encoding import to_unicode
 from authlib.common.security import UNICODE_ASCII_CHARACTER_SET
+from authlib.integrations.flask_oauth2 import \
+    AuthorizationServer as _AuthorizationServer
 from authlib.specs.rfc6749 import (
     OAuth2Request,
-    ClientAuthentication,
-    AuthorizationServer as _AuthorizationServer)
-from authlib.integrations.flask_oauth2 import AuthorizationServer as _AuthorizationServer
-from authlib.specs.rfc6750 import BearerToken
+    ClientAuthentication)
 from werkzeug.wrappers import Response
+
+from oauth.bearer_token import BearerToken
 
 GRANT_TYPES_EXPIRES = {
     'authorization_code': 864000,
@@ -45,12 +46,13 @@ def generate_token(length=30, chars=UNICODE_ASCII_CHARACTER_SET):
     return ''.join(rand.choice(chars) for _ in range(length))
 
 
-class OAuthAuthorizationServer(_AuthorizationServer):
-    def __init__(self, access_token_generator, refresh_token_generator, app, query_client=None, save_token=None, **config):
+class AuthorizationServer(_AuthorizationServer):
+    def __init__(self, access_token_generator, refresh_token_generator, app,
+                 query_client=None, save_token=None, **config):
         self.access_token_generator = access_token_generator
         self.refresh_token_generator = refresh_token_generator
 
-        super(OAuthAuthorizationServer, self).__init__(
+        super(AuthorizationServer, self).__init__(
             app, query_client, save_token, **config)
         self.authenticate_client = ClientAuthentication(
             query_client=query_client)
@@ -86,10 +88,3 @@ class OAuthAuthorizationServer(_AuthorizationServer):
         if isinstance(payload, dict):
             payload = json.dumps(payload)
         return Response(payload, status=status, headers=headers)
-
-    def send_signal(self, name, *args, **kwargs):
-        # if name == 'after_authenticate_client':
-        #    client_authenticated.send(self, *args, **kwargs)
-        # elif name == 'after_revoke_token':
-        #    token_revoked.send(self, *args, **kwargs)
-        print("Signal")

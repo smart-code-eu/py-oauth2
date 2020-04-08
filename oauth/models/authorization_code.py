@@ -1,6 +1,5 @@
-import enum
-
 from authlib.specs.rfc6749 import AuthorizationCodeMixin
+
 import oauth
 
 db = oauth.__DB__

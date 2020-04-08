@@ -14,7 +14,6 @@ class OAuthClientType(enum.Enum):
     PUBLIC = "public"
     CONFIDENTIAL = "confidential"
 
-
 class OAuthClient(db.Model, ClientMixin):
     __tablename__ = 'oauth_client'
 
@@ -24,6 +23,9 @@ class OAuthClient(db.Model, ClientMixin):
     client_id = db.Column(db.Text)
     client_secret = db.Column(db.Text)
     client_type = db.Column(db.Enum(OAuthClientType))
+
+    jwt_iss = db.Column(db.Text)
+    jwt_aud = db.Column(db.Text)
 
     any_scope_is_allowed = db.Column(db.Boolean)
 
@@ -47,7 +49,6 @@ class OAuthClient(db.Model, ClientMixin):
         return list_to_scope([s for s in scopes if s in allowed])
 
     def get_client_id(self):
-        # client_id
         return self.client_id
 
     def get_default_redirect_uri(self):
