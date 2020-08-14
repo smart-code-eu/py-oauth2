@@ -3,7 +3,7 @@ import json
 from contextlib import contextmanager
 
 import flask
-from authlib.specs.rfc6749 import (
+from authlib.oauth2.rfc6749 import (
     ResourceProtector as _ResourceProtector,
     MissingAuthorizationError, HttpRequest,
     OAuth2Error)

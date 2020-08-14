@@ -1,6 +1,6 @@
 import enum
 
-from authlib.specs.rfc6749 import TokenMixin
+from authlib.oauth2.rfc6749 import TokenMixin
 import oauth
 
 db = oauth.__DB__

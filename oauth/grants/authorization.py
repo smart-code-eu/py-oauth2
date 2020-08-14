@@ -1,4 +1,4 @@
-from authlib.specs.rfc6749.grants import (
+from authlib.oauth2.rfc6749.grants import (
     AuthorizationCodeGrant as _AuthorizationCodeGrant)
 
 import oauth

@@ -1,6 +1,6 @@
 import time
 
-from authlib.specs.rfc6749.grants import (
+from authlib.oauth2.rfc6749.grants import (
     RefreshTokenGrant as _RefreshTokenGrant)
 
 import oauth

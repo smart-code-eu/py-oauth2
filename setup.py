@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="oauth", # Replace with your own username
+    name="py-oauth2", # Replace with your own username
     version="0.0.1",
     author="Darian Jug",
     author_email="darian.jug@me.com",

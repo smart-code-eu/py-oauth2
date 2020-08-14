@@ -28,7 +28,7 @@ class OAuthController:
         self.blueprint.add_url_rule('/oauth/token', 'issue_token',
                                     self.issue_token, methods=(['GET', 'POST']))
 
-        key = open('/Users/darian/Desktop/wf-app-pub.pem', 'r').read()
+        key = open(oauth.__JWT_PATH__, 'r').read()
 
         generate_token = OAuthController.__generate_token("ok", "ok", key)
 

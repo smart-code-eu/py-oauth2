@@ -5,7 +5,7 @@ import oauth
 db = oauth.__DB__
 
 from authlib.oauth2.rfc6749.util import scope_to_list, list_to_scope
-from authlib.specs.rfc6749 import ClientMixin
+from authlib.oauth2.rfc6749 import ClientMixin
 from oauth.models.grant import grant_association_table
 from oauth.models.scope import scope_association_table
 
@@ -13,6 +13,7 @@ from oauth.models.scope import scope_association_table
 class OAuthClientType(enum.Enum):
     PUBLIC = "public"
     CONFIDENTIAL = "confidential"
+
 
 class OAuthClient(db.Model, ClientMixin):
     __tablename__ = 'oauth_client'

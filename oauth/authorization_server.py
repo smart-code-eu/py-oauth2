@@ -6,7 +6,7 @@ from authlib.common.encoding import to_unicode
 from authlib.common.security import UNICODE_ASCII_CHARACTER_SET
 from authlib.integrations.flask_oauth2 import \
     AuthorizationServer as _AuthorizationServer
-from authlib.specs.rfc6749 import (
+from authlib.oauth2.rfc6749 import (
     OAuth2Request,
     ClientAuthentication)
 from werkzeug.wrappers import Response

@@ -1,4 +1,4 @@
-from authlib.specs.rfc6750 import BearerTokenValidator as _BearerTokenValidator
+from authlib.oauth2.rfc6750 import BearerTokenValidator as _BearerTokenValidator
 
 from oauth.models import OAuthToken
 
