@@ -17,6 +17,8 @@ from authlib.jose import jwt
 
 import uuid
 
+import pytz
+
 db = oauth.__DB__
 
 
@@ -72,7 +74,7 @@ class OAuthController:
             header = {'alg': 'RS256'}
 
             exp = datetime.datetime.now() + datetime.timedelta(seconds=3000)
-            exp_iso = exp.isoformat()
+            exp_iso = exp.replace(tzinfo=pytz.UTC).isoformat()
 
             payload = {
                 'iss': client.jwt_iss,
