@@ -41,10 +41,7 @@ class ResourceProtector(_ResourceProtector):
         :param error: OAuth2Error
         :raise: HTTPException
         """
-        status = error.status_code
-        body = json.dumps(dict(error.get_body()))
-        headers = error.get_headers()
-        return Response(body, status=status, headers=headers)
+        raise error
 
     def acquire_token(self, scope=None, operator='AND'):
         """A method to acquire current valid token with the given scope.
