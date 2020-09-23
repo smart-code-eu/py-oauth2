@@ -17,7 +17,7 @@ class OAuthClientGrant(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    name = db.Column(db.Text, unique=True)
+    name = db.Column(db.String(255), unique=True)
     clients = db.relationship(
         "OAuthClient",
         secondary=grant_association_table,

@@ -17,7 +17,7 @@ class OAuthClientScope(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
 
-    name = db.Column(db.Text, unique=True)
+    name = db.Column(db.Text)
     clients = db.relationship(
         "OAuthClient",
         secondary=scope_association_table,
